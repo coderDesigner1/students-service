@@ -39,10 +39,10 @@ public class ScoreServiceController {
         return new ResponseEntity<>(scoreResponseModelList, HttpStatus.OK);
     }
 
-    @PostMapping
+  /*  @PostMapping
     public ResponseEntity<ScoreResponseModel> addScore(ScoreRequestModel scoreRequestModel){
         ScoreResponseModel scoreResponseModel = new ScoreResponseModel();
         scoreResponseModel = scoreService.addScore();
         return scoreRequestModel;
-    }
+    }*/
 }
