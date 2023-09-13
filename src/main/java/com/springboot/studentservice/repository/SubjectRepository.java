@@ -13,16 +13,25 @@ public interface SubjectRepository extends JpaRepository<Subject, Long> {
     @Modifying
     @Transactional
     @Query(
-            value="Delete from Subject where subject=?1",
+            value="Delete from Subject where subject_Id=?1",
             nativeQuery = true
     )
-    public int deleteSubject(String subject);
+    public void deleteSubject(int id);
 
     @Modifying
     @Transactional
     @Query(
-            value="Update Subject set subject = ?1 where subject= ?2 ",
+            value="Update Subject set subject = ?1 where subject_id= ?2 ",
             nativeQuery = true
     )
-    public int updateSubject(String setSubject, String changeSubject);
+    public void updateSubject(String setSubject, int id);
+//
+//    @Modifying
+//    @Transactional
+//    @Query(
+//            value="Insert into Subject(subject) values (?1)",
+//            nativeQuery = true
+//    )
+//
+//    public void addSubject(String subject);
 }

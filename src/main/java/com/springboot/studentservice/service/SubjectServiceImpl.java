@@ -26,11 +26,27 @@ public class SubjectServiceImpl implements SubjectService{
         subject.forEach((sub)->{
             SubjectDto subjectDto = modelMapper.map(sub, SubjectDto.class);
             subjectDtoList.add(subjectDto);
-            System.out.println("subjectDto.getSubjectId() = " + subjectDto.getSubjectId());
-
         });
         
 
         return subjectDtoList;
+    }
+
+    @Override
+    public void deleteSubject(int subjectId) {
+        subjectRepository.deleteSubject(subjectId);
+    }
+
+    @Override
+    public void updateSubject(SubjectDto subjectDto) {
+        subjectRepository.updateSubject(subjectDto.getSubject(), subjectDto.getSubjectId());
+
+    }
+
+    @Override
+    public void addSubject(SubjectDto subjectDto) {
+        ModelMapper modelMapper = new ModelMapper();
+        Subject subject = modelMapper.map(subjectDto, Subject.class);
+        subjectRepository.save(subject);
     }
 }

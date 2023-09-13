@@ -29,8 +29,8 @@ public class Subject {
     @Column(nullable = false)
     private String subject;
 
-    @OneToMany(mappedBy = "subject")
-    private List<Results> results = new ArrayList<>();
+//    @OneToMany(mappedBy = "subject")
+//    private List<Results> results = new ArrayList<>();
 }
 
 

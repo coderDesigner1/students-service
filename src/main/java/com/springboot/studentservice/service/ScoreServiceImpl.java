@@ -29,7 +29,9 @@ public class ScoreServiceImpl implements ScoreService{
     }
 
     @Override
-    public ScoreDto addScore(ScoreDto score){
+    public ScoreDto addScore() {
         return null;
     }
+
+
 }

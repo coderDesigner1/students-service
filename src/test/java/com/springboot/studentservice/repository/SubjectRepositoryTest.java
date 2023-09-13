@@ -1,5 +1,6 @@
 package com.springboot.studentservice.repository;
 
+import com.springboot.studentservice.dto.SubjectDto;
 import com.springboot.studentservice.entity.Score;
 import com.springboot.studentservice.entity.Subject;
 import org.junit.jupiter.api.Test;
@@ -18,11 +19,9 @@ class SubjectRepositoryTest {
 
     // insert subject into table
     @Test
-    public void saveSubject() {
+    public void addSubject() {
         Subject subject = new Subject();
-
-        subject.setSubject("Science");
-
+        subject.setSubject("Maths");
         subjectRepository.save(subject);
 
     }
@@ -30,18 +29,19 @@ class SubjectRepositoryTest {
     // delete subject from the table if there is no relation with other tables
     @Test
     public void deleteSubject(){
-       String subject = "Math";
+        int subjectId = 1;
 
-        subjectRepository.deleteSubject(subject);
+        subjectRepository.deleteSubject(subjectId);
     }
 
     // update subject name in the table if there is no relation with other tables
     @Test
     public void updateSubject(){
-        String changeSubject = "Chemistry";
-        String forSubject = "Science";
+        SubjectDto subjectDto = new SubjectDto();
+        subjectDto.setSubjectId(2);
+        subjectDto.setSubject("Psychology");
 
-        subjectRepository.updateSubject(changeSubject, forSubject);
+        subjectRepository.updateSubject(subjectDto.getSubject(), subjectDto.getSubjectId());
     }
 
     // get all the subjects
