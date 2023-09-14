@@ -19,7 +19,7 @@ public class ScoreRepositoryTest {
     public void saveScore(){
        Score score = new Score();
 
-        score.setScore(3);
+        score.setScore(15);
         scoreRepository.save(score);
 
     }
@@ -27,7 +27,7 @@ public class ScoreRepositoryTest {
     // delete data from score table for an id
     @Test
     public void deleteScoreNativeQuery(){
-        int scoreId = 2;
+        int scoreId = 11;
 
         scoreRepository.deleteScore(scoreId);
     }
@@ -35,7 +35,7 @@ public class ScoreRepositoryTest {
     // update score table for an id
     @Test
     public void updateScoreNativeQueryParam(){
-        int score = 8;
+        int score = 15;
         int scoreId = 3;
 
         scoreRepository.updateScore(score, scoreId);

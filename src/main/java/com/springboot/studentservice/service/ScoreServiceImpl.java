@@ -29,8 +29,21 @@ public class ScoreServiceImpl implements ScoreService{
     }
 
     @Override
-    public ScoreDto addScore() {
-        return null;
+    public void addScore(ScoreDto scoreDto) {
+        ModelMapper modelMapper = new ModelMapper();
+        Score score = modelMapper.map(scoreDto, Score.class);
+        scoreRepository.save(score);
+    }
+
+    @Override
+    public void deleteScore(int scoreId) {
+        scoreRepository.deleteScore(scoreId);
+    }
+
+    @Override
+    public void updateScore(ScoreDto scoreDto) {
+       scoreRepository.updateScore(scoreDto.getScore(), scoreDto.getScoreId());
+
     }
 
 

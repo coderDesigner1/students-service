@@ -9,10 +9,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,10 +36,25 @@ public class ScoreServiceController {
         return new ResponseEntity<>(scoreResponseModelList, HttpStatus.OK);
     }
 
-  /*  @PostMapping
-    public ResponseEntity<ScoreResponseModel> addScore(ScoreRequestModel scoreRequestModel){
-        ScoreResponseModel scoreResponseModel = new ScoreResponseModel();
-        scoreResponseModel = scoreService.addScore();
-        return scoreRequestModel;
-    }*/
+    @PostMapping
+    public ResponseEntity<Void> addScore(@RequestBody ScoreRequestModel scoreRequestModel){
+        ModelMapper modelMapper = new ModelMapper();
+        ScoreDto scoreDto = modelMapper.map(scoreRequestModel, ScoreDto.class);
+        scoreService.addScore(scoreDto);
+        return ResponseEntity.noContent().build();
+    }
+
+    @DeleteMapping("/{scoreId}")
+    public ResponseEntity<Void> deleteScore(@PathVariable int scoreId){
+        scoreService.deleteScore(scoreId);
+        return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping
+    public ResponseEntity<Void> updateScore(@RequestBody ScoreRequestModel scoreRequestModel){
+        ModelMapper modelMapper = new ModelMapper();
+        ScoreDto scoreDto = modelMapper.map(scoreRequestModel, ScoreDto.class);
+        scoreService.updateScore(scoreDto);
+        return ResponseEntity.noContent().build();
+    }
 }

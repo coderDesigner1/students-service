@@ -9,5 +9,9 @@ import java.util.List;
 public interface ScoreService {
     public List<ScoreDto> getAllScore();
 
-    public ScoreDto addScore();
+    public void addScore(ScoreDto scoreDto);
+
+    public void deleteScore(int scoreId);
+
+    public void updateScore(ScoreDto scoreDto);
 }

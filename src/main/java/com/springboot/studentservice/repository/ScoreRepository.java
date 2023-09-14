@@ -17,7 +17,7 @@ public interface ScoreRepository extends JpaRepository<Score, Long>{
             value="Delete from Score where score_id = ?1",
             nativeQuery = true
     )
-    public int deleteScore(int scoreId);
+    public void deleteScore(int scoreId);
 
     @Modifying
     @Transactional
@@ -25,14 +25,14 @@ public interface ScoreRepository extends JpaRepository<Score, Long>{
             value="Update Score set score = :score where score_id = :Id",
             nativeQuery = true
     )
-    public int updateScore(@Param("score") int score, @Param("Id") int scoreId);
+    public void updateScore(@Param("score") int score, @Param("Id") int scoreId);
 
-    @Modifying
-    @Transactional
-    @Query(
-            value="Insert into Score(score) values ?1",
-            nativeQuery = true
-    )
-    public int addScore(int score);
+//    @Modifying
+//    @Transactional
+//    @Query(
+//            value="Insert into Score(score) values ?1",
+//            nativeQuery = true
+//    )
+//    public void addScore(int );
 
 }
