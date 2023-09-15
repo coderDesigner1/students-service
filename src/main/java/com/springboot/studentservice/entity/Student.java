@@ -31,11 +31,11 @@ import java.util.List;
                 resultSetMapping = "StudentsLastNameMapping"
         ),
         @NamedNativeQuery(
-                name="Student.findStudentWithSameFirstAndLastNameWithDto",
-                query = "select s.first_name,  s.last_name , street, city, state, country from student s, address a\n" +
-                        "where s.student_id = a.student_id and s.first_name = ?1 and s.last_name = ?2",
-                //resultClass = StudentDetailsDto.class,
-                resultSetMapping = "StudentsFirstAndLastNameMapping"
+                name="Student.findStudentWithSameFirstAndLastName",
+                query = "select s.student_id,s.first_name,  s.last_name ,birth_date, enter_year, email,s.address_id, street, city, state, country from student s, address a\n" +
+                        "where s.address_id = a.stu_address_id and s.first_name = ?1 and s.last_name = ?2",
+                resultClass = Student.class
+                //resultSetMapping = "StudentsFirstAndLastNameMapping"
         )
 
 })

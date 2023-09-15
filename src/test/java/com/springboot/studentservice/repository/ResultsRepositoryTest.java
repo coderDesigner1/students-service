@@ -57,7 +57,7 @@ public class ResultsRepositoryTest {
     // return all subjects with scores for specific student
     @Test
     public void findAllResultsForOneStudent(){
-        int studentId = 10;
+        int studentId = 2;
 
         List<ResultsProjection> resultsDtoList = resultsRepository.findAllResultsForOneStudent(studentId);
         for (ResultsProjection results : resultsDtoList) {

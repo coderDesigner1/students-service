@@ -3,11 +3,13 @@ package com.springboot.studentservice.service;
 import com.springboot.studentservice.dto.StudentDetailsDto;
 import com.springboot.studentservice.entity.Student;
 import com.springboot.studentservice.model.StudentRequestModel;
+import com.springboot.studentservice.model.StudentResponseModel;
 import com.springboot.studentservice.repository.StudentRepository;
 import com.springboot.studentservice.shared.Utils;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.Banner;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -67,6 +69,40 @@ public class StudentServiceImpl implements StudentService {
         }catch(Exception e){
             return false;
         }
+    }
+
+    @Override
+    public List<StudentDetailsDto> getAllStudentsWithAddress() {
+        Iterable<Student> studentsWithAddresses = studentRepository.findAllStudentsWithAddress();
+       // ModelMapper modelMapper = new ModelMapper();
+        return utils.getStudentDetailsList(studentsWithAddresses);
+
+    }
+
+    @Override
+    public StudentDetailsDto getStudentByEmail(String email) {
+        ModelMapper modelMapper = new ModelMapper();
+        Student sDetails = studentRepository.findStudentByEmail(email);
+        return modelMapper.map(sDetails, StudentDetailsDto.class);
+    }
+
+    @Override
+    public List<StudentDetailsDto> getStudentByFirstName(String firstName) {
+
+        Iterable<Student> sDetails = studentRepository.findStudentByFirstName(firstName);
+        return utils.getStudentDetailsList(sDetails);
+    }
+
+    @Override
+    public List<StudentDetailsDto> getStudentByLastName(String lastName) {
+        Iterable<Student> sDetails = studentRepository.findStudentByLastName(lastName);
+        return utils.getStudentDetailsList(sDetails);
+    }
+
+    @Override
+    public List<StudentDetailsDto> getStudentByFirstLastName(String firstName, String lastName) {
+        Iterable<Student> sDetails = studentRepository.findStudentWithSameFirstAndLastName(firstName,lastName);
+        return utils.getStudentDetailsList(sDetails);
     }
 
 

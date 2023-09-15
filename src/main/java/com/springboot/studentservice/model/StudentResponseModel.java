@@ -2,10 +2,7 @@ package com.springboot.studentservice.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.springboot.studentservice.entity.Address;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Date;
@@ -14,6 +11,7 @@ import java.util.Date;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 public class StudentResponseModel {
 
 

@@ -177,7 +177,7 @@ class StudentRepositoryTest {
     // return one student by email
     @Test
     public void findStudentByEmail(){
-        String email = "michael.johnson@abclog.com";
+        String email = "ethan.williams@hotmail.com";
         Student sDetails = studentRepository.findStudentByEmail(email);
         System.out.println("Name: " + sDetails.getFirstName() + " " + sDetails.getLastName());
         System.out.println("Address: " + sDetails.getAddress().getStu_add_street() + ", " + sDetails.getAddress().getStu_add_city()+ ", " + sDetails.getAddress().getStu_add_state() + ", " + sDetails.getAddress().getStu_add_country());
@@ -187,7 +187,7 @@ class StudentRepositoryTest {
     // return students by same first name
     @Test
     public void findStudentsByFirstName(){
-        String fName = "Emma";
+        String fName = "Ethan";
         List<Student> studentDetails = studentRepository.findStudentByFirstName(fName);
 
         for (Student sDetails : studentDetails) {

@@ -77,7 +77,7 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
             value = "Delete from Student where student_id = ?1",
             nativeQuery = true
     )
-    public int deleteStudentById(int id);
+    public void deleteStudentById(int id);
 
     // return all students with their address
     @Query(
@@ -91,7 +91,7 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
 
     // return one student by email with address
     @Query(
-            value = "select student_id, first_name,  last_name ,  email, s.address_id,  street, city, state, country from student s, address a\n" +
+            value = "select student_id, first_name,  last_name , birth_date,enter_year,  email, s.address_id,  street, city, state, country from student s, address a \n" +
                     "where s.address_id = a.stu_address_id and s.email = ?1",
             nativeQuery = true
     )
@@ -110,8 +110,8 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
     public List<StudentDetailsDto> findStudentByLastNameWithDto(String lName);
 
     // return students with same last name
-    @Query(name = "Student.findStudentWithSameFirstAndLastNameWithDto", nativeQuery = true)
-    public List<StudentDetailsDto> findStudentWithSameFirstAndLastNameWithDto(String fName,String lName);
+    @Query(name = "Student.findStudentWithSameFirstAndLastName", nativeQuery = true)
+    public List<Student> findStudentWithSameFirstAndLastName(String fName,String lName);
 
 
 

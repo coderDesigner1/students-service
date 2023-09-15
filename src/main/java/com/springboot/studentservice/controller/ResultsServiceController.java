@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -24,12 +25,11 @@ public class ResultsServiceController {
 
     @GetMapping
     public ResponseEntity<List<ResultsResponseModel>> getAllResults(){
-        List<ResultsDto> resultsDto = new ArrayList<>();
         List<ResultsResponseModel> resultsResponseModelList = new ArrayList<>();
 
         ModelMapper modelMapper = new ModelMapper();
         modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
-        resultsDto = resultsService.getAllResults();
+        List<ResultsDto> resultsDto = resultsService.getAllResults();
 
         resultsDto.forEach((result)->{
 
@@ -37,6 +37,18 @@ public class ResultsServiceController {
             resultsResponseModelList.add(resultsResponseModel);
         });
 
+        return new ResponseEntity<>(resultsResponseModelList, HttpStatus.OK);
+    }
+
+    @GetMapping("/{studentId}")
+    public ResponseEntity<List<ResultsResponseModel>> getResultsForStudent(@PathVariable int studentId){
+        ModelMapper modelMapper = new ModelMapper();
+        List<ResultsResponseModel> resultsResponseModelList = new ArrayList<>();
+        List<ResultsDto> resultsDtoList = resultsService.getResultsForStudent(studentId);
+        resultsDtoList.forEach((result)->{
+            ResultsResponseModel resultsResponseModel = modelMapper.map(result, ResultsResponseModel.class);
+            resultsResponseModelList.add(resultsResponseModel);
+        });
         return new ResponseEntity<>(resultsResponseModelList, HttpStatus.OK);
     }
 }

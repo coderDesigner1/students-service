@@ -23,7 +23,7 @@ public class Utils {
             StudentDetailsDto studentDetailsDto = modelMapper.map(student, StudentDetailsDto.class);
             studentList.add(studentDetailsDto);
         });
-
+       // System.out.println("studentList = " + studentList);
         return studentList;
     }
 
@@ -33,12 +33,16 @@ public class Utils {
         List<StudentResponseModel> studentList = new ArrayList<>();
         ModelMapper modelMapper = new ModelMapper();
         modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
+        modelMapper.createTypeMap(StudentDetailsDto.class, StudentResponseModel.class)
+                .addMapping(StudentDetailsDto::getId, StudentResponseModel::setStudentId);
 
-        students.forEach((student) -> {
-            StudentResponseModel studentResponseModel = modelMapper.map(student, StudentResponseModel.class);
+        students.forEach((studentDetailsDto) -> {
+            System.out.println("studentDetailsDto = " + studentDetailsDto);
+
+            StudentResponseModel studentResponseModel = modelMapper.map(studentDetailsDto, StudentResponseModel.class);
             studentList.add(studentResponseModel);
         });
-
+        System.out.println("studentList = " + studentList);
         return studentList;
     }
 

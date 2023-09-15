@@ -16,7 +16,7 @@ public class StudentDetailsDto {
     @Autowired
     private Address address;
 
-    private long Id;
+    private long id;
     private String firstName;
     private String lastName;
     private String email;

@@ -63,5 +63,35 @@ public class StudentServiceController {
 
     }
 
+    @GetMapping("/getStudents")
+    public ResponseEntity<List<StudentResponseModel>> getAllStudentsWithAddress(){
+        List<StudentDetailsDto> studentsDto = studentService.getAllStudentsWithAddress();
+        //System.out.println("studentsDto = " + studentsDto);
+        return new ResponseEntity<>(utils.getStudentResponseModelList(studentsDto), HttpStatus.OK);
+    }
 
+    @GetMapping("/getStudent/{email}")
+    public ResponseEntity<StudentResponseModel> getStudentByEmail(@PathVariable String email){
+        ModelMapper modelMapper = new ModelMapper();
+        StudentDetailsDto studentDetailsDto= studentService.getStudentByEmail(email);
+        StudentResponseModel studentResponseModel = modelMapper.map(studentDetailsDto, StudentResponseModel.class);
+        return new ResponseEntity<>(studentResponseModel, HttpStatus.OK);
+    }
+    @GetMapping("/getStudentFName/{firstName}")
+    public ResponseEntity<List<StudentResponseModel>> getStudentByFirstName(@PathVariable String firstName){
+        List<StudentDetailsDto> studentDetailsDtoList= studentService.getStudentByFirstName(firstName);
+        return new ResponseEntity<>(utils.getStudentResponseModelList(studentDetailsDtoList), HttpStatus.OK);
+    }
+
+    @GetMapping("/getStudentLName/{lastName}")
+    public ResponseEntity<List<StudentResponseModel>> getStudentByLastName(@PathVariable String lastName){
+        List<StudentDetailsDto> studentDetailsDtoList= studentService.getStudentByLastName(lastName);
+        return new ResponseEntity<>(utils.getStudentResponseModelList(studentDetailsDtoList), HttpStatus.OK);
+    }
+
+    @GetMapping("/getStudentFLName/{firstName}/{lastName}")
+    public ResponseEntity<List<StudentResponseModel>> getStudentByFirstLastName(@PathVariable String firstName, @PathVariable String lastName){
+        List<StudentDetailsDto> studentDetailsDtoList= studentService.getStudentByFirstLastName(firstName, lastName);
+        return new ResponseEntity<>(utils.getStudentResponseModelList(studentDetailsDtoList), HttpStatus.OK);
+    }
 }
