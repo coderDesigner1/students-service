@@ -42,6 +42,6 @@ public class ResultsServiceImpl implements ResultsService{
 
     @Override
     public List<ResultsDto> getResultsForStudent(int studentId) {
-        return null;
+        return 1;
     }
 }
