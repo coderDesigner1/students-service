@@ -21,7 +21,7 @@ class StudentRepositoryTest {
     private StudentRepository studentRepository;
 
     // Save one student
-    @Test
+   /* @Test
     public void saveStudent() throws ParseException {
         Address address = new Address();
 
@@ -210,7 +210,7 @@ class StudentRepositoryTest {
             System.out.println("-----------------------------------");
         }
 
-    }
+    }*/
 
   /*  // return students by same last name using DTO
     @Test

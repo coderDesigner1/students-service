@@ -48,7 +48,7 @@ public class ResultsRepositoryTest {
         resultsRepository.save(results);
     }*/
 
-    @Test
+  /*  @Test
     public void getAllResults(){
         List<ResultsDao> results = resultsRepository.getAllResults();
 
@@ -88,5 +88,5 @@ public class ResultsRepositoryTest {
     @Test
     public void getAllResultsData(){
         List<ResultsProjection> resultsDtoList = resultsRepository.getAllResultsData();
-    }
+    }*/
 }

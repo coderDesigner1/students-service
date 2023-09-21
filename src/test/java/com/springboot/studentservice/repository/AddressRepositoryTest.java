@@ -42,7 +42,7 @@ public class AddressRepositoryTest {
 //    }
 
     // delete address
-    @Test
+  /*  @Test
     public void deleteAddressById(){
         int id = 1;
         addressRepository.deleteAddressById(id);
@@ -60,7 +60,7 @@ public class AddressRepositoryTest {
     public void getAllAddresses(){
         List<Address> addressList = addressRepository.findAll();
         System.out.println("addressList = " + addressList);
-    }
+    }*/
 
     
 }

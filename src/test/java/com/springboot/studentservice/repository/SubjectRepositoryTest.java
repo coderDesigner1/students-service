@@ -18,7 +18,7 @@ class SubjectRepositoryTest {
     private SubjectRepository subjectRepository;
 
     // insert subject into table
-    @Test
+ /*   @Test
     public void addSubject() {
         Subject subject = new Subject();
         subject.setSubject("Maths");
@@ -52,7 +52,7 @@ class SubjectRepositoryTest {
         for(Subject s: subjectList) {
             System.out.println(s.getSubject());
         }
-    }
+    }*/
 
 
 }

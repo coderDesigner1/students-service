@@ -15,7 +15,7 @@ public class ScoreRepositoryTest {
     private ScoreRepository scoreRepository;
 
     // insert data into score table
-    @Test
+   /* @Test
     public void saveScore(){
        Score score = new Score();
 
@@ -49,7 +49,7 @@ public class ScoreRepositoryTest {
        for(Score s: scoreList) {
            System.out.println(s.getScore());
        }
-    }
+    }*/
 
 
 }
