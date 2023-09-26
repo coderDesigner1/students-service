@@ -22,7 +22,6 @@ public class ResultsServiceController {
 
     @Autowired
     private ResultsService resultsService;
-    int i = 0;
 
     @GetMapping
     public ResponseEntity<List<ResultsResponseModel>> getAllResults(){
