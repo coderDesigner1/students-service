@@ -15,7 +15,7 @@ public interface StudentService {
 
     public StudentDetailsDto updateStudent(StudentDetailsDto studentDetailsDto);
 
-    public boolean deleteStudent(int id);
+    public void deleteStudent(Long id);
 
     public List<StudentDetailsDto> getAllStudentsWithAddress();
 

@@ -37,7 +37,7 @@ public class StudentServiceController {
         return new ResponseEntity<>(utils.getStudentResponseModelList(studentsDto), HttpStatus.OK);
     }
 
-    @PostMapping("/add")
+    @PostMapping("/addStudent")
     public ResponseEntity<Long> addStudent(@RequestBody StudentRequestModel studentDetails){
 
 //        StudentDetailsDto studentDetail = new StudentDetailsDto();
@@ -49,16 +49,16 @@ public class StudentServiceController {
         return new ResponseEntity<>(S.getId(), HttpStatus.CREATED);
     }
 
-    @PutMapping("/update/{id}")
+    @PutMapping("/updateStudent/{id}")
     public ResponseEntity<String> updateStudent(@PathVariable Long id, @RequestBody StudentRequestModel student){
 
         StudentDetailsDto S = studentService.updateStudent(utils.getStudentDetailsDto(student));
         return new ResponseEntity<>("Updated record", HttpStatus.OK);
     }
 
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Void> deleteStudent(@PathVariable int id){
-        boolean result = studentService.deleteStudent(id);
+    @DeleteMapping("/deleteStudent/{id}")
+    public ResponseEntity<Void> deleteStudent(@PathVariable Long id){
+        studentService.deleteStudent(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 
     }

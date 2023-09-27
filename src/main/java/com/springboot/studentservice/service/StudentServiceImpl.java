@@ -2,6 +2,7 @@ package com.springboot.studentservice.service;
 
 import com.springboot.studentservice.dto.StudentDetailsDto;
 import com.springboot.studentservice.entity.Student;
+import com.springboot.studentservice.exception.NotFoundException;
 import com.springboot.studentservice.model.StudentRequestModel;
 import com.springboot.studentservice.model.StudentResponseModel;
 import com.springboot.studentservice.repository.StudentRepository;
@@ -10,6 +11,7 @@ import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.Banner;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -61,13 +63,13 @@ public class StudentServiceImpl implements StudentService {
         return modelMapper.map(s, StudentDetailsDto.class);
     }
 
-    @Override
-    public boolean deleteStudent(int id) {
+   @Override
+    public void deleteStudent(Long id) {
         try{
-            studentRepository.deleteStudentById(id);
-            return true;
-        }catch(Exception e){
-            return false;
+            studentRepository.deleteById(id);
+
+        }catch(DataIntegrityViolationException e){
+           throw new NotFoundException("Student cannot be deleted");
         }
     }
 

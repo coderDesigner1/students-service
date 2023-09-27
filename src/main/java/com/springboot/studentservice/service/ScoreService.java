@@ -11,7 +11,7 @@ public interface ScoreService {
 
     public void addScore(ScoreDto scoreDto);
 
-    public void deleteScore(int scoreId);
+    public void deleteScore(Long scoreId);
 
     public void updateScore(ScoreDto scoreDto);
 }

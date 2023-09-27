@@ -2,9 +2,11 @@ package com.springboot.studentservice.service;
 
 import com.springboot.studentservice.dto.ScoreDto;
 import com.springboot.studentservice.entity.Score;
+import com.springboot.studentservice.exception.NotFoundException;
 import com.springboot.studentservice.repository.ScoreRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -36,8 +38,14 @@ public class ScoreServiceImpl implements ScoreService{
     }
 
     @Override
-    public void deleteScore(int scoreId) {
-        scoreRepository.deleteScore(scoreId);
+    public void deleteScore(Long scoreId) {
+        try{
+            scoreRepository.deleteById(scoreId);
+        }catch(DataIntegrityViolationException e){
+            throw new NotFoundException("Unable to delete Score as it is referenced in Results");
+        }
+
+
     }
 
     @Override

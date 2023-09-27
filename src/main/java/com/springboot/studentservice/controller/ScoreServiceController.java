@@ -37,17 +37,17 @@ public class ScoreServiceController {
     }
 
     @PostMapping
-    public ResponseEntity<Void> addScore(@RequestBody ScoreRequestModel scoreRequestModel){
+    public ResponseEntity<String> addScore(@RequestBody ScoreRequestModel scoreRequestModel){
         ModelMapper modelMapper = new ModelMapper();
         ScoreDto scoreDto = modelMapper.map(scoreRequestModel, ScoreDto.class);
         scoreService.addScore(scoreDto);
         return ResponseEntity.noContent().build();
     }
 
-    @DeleteMapping("/{scoreId}")
-    public ResponseEntity<Void> deleteScore(@PathVariable int scoreId){
+    @DeleteMapping("/deleteScore/{scoreId}")
+    public ResponseEntity<String> deleteScore(@PathVariable Long scoreId){
         scoreService.deleteScore(scoreId);
-        return ResponseEntity.noContent().build();
+        return new ResponseEntity<>("Score is deleted", HttpStatus.OK);
     }
 
     @PutMapping
