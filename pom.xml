@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.springboot</groupId>
 	<artifactId>student-service</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.2-SNAPSHOT</version>
 	<name>student-service</name>
 	<description>Student Service MicroService</description>
 	<properties>

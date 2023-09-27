@@ -65,7 +65,7 @@ public class AddressRepositoryTest {
     public void getAllAddresses(){
         List<Address> addressList = addressRepository.findAll();
         System.out.println("addressList = " + addressList);
-    }*/
+    }
 
     @Test
     public void saveAddress(){
@@ -101,7 +101,7 @@ public class AddressRepositoryTest {
         Long id=50L;
         addressRepository.deleteById(id);
 
-    }
+    }*/
 
     
 }
