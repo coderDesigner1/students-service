@@ -5,8 +5,10 @@ import com.springboot.studentservice.dto.ResultsDto;
 import com.springboot.studentservice.interfaces.ResultsProjection;
 import com.springboot.studentservice.entity.Results;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -20,31 +22,24 @@ public interface ResultsRepository extends JpaRepository<Results, Long> {
 
     public List<ResultsDao> getAllResults();
 
-//    @Query(value = "SELECT new "
-//            + "com.rahul.employeeportal.model.ActiveSession(s.username, e.firstName, e.lastName, MAX(s.loginTime), s.logoutTime, s.isActive) from SessionsStore s, Employee e "
-//            + " where e.username = s.username GROUP BY s.username")
-//    List<ActiveSession> findUsers();
 
-    @Query(
-            value="select first_name as firstName, last_name as lastName, subject, score from results r,student st, subject su, score sc\n" +
-                    "where r.student_id = st.student_id\n" +
-                    "and r.subject_id = su.subject_id\n" +
-                    "and r.score_id = sc.score_id\n" +
-                    "and r.student_id = ?1",
-            nativeQuery = true
-    )
-    public List<ResultsProjection> findAllResultsForOneStudent(int studentId);
+    @Query( "SELECT new com.springboot.studentservice.dao.ResultsDao(s.firstName, s.lastName, s.studentId,r.resultId, su.subject, sc.score) FROM Results r JOIN r.student s JOIN r.subject su JOIN r.score sc WHERE s.studentId=?1")
+
+    public List<ResultsDao> findAllResultsForOneStudent(int studentId);
 
     //return one subject with scores for specific student
-    @Query(
-           value = "select first_name as firstName, last_name as lastName, subject, score from results r,student st, subject su, score sc\n" +
-                   "where r.student_id = st.student_id\n" +
-                   "and r.subject_id = su.subject_id\n" +
-                   "and r.score_id = sc.score_id\n" +
-                   "and r.student_id = ?1 and subject = ?2" ,
-            nativeQuery = true
-    )
-    public ResultsProjection getSubjectScoreForOneStudent(int id, String subject);
+    @Query("SELECT new com.springboot.studentservice.dao.ResultsDao(s.firstName, s.lastName, s.studentId,r.resultId, su.subject, sc.score) " +
+            "FROM Results r JOIN r.student s JOIN r.subject su JOIN r.score sc WHERE s.studentId=?1 and su.subject_id=?2")
+
+    public List<ResultsDao> getSubjectScoreForOneStudent(int studentId, int subjectId);
+
+    //return all students scores for one subject
+    @Query("SELECT new com.springboot.studentservice.dao.ResultsDao(s.firstName, s.lastName, s.studentId,r.resultId, su.subject, sc.score) " +
+            "FROM Results r JOIN r.student s JOIN r.subject su JOIN r.score sc WHERE su.subject_id=?1")
+
+    public List<ResultsDao> getStudentScoreForOneSubject(int subjectId);
+
+
 
     //return all subjects/scores/addresses/students
     @Query(
@@ -56,5 +51,19 @@ public interface ResultsRepository extends JpaRepository<Results, Long> {
             nativeQuery = true
     )
     public List<ResultsProjection> getAllResultsData();
+
+
+    // insert subject score to a student
+    @Modifying
+    @Transactional
+//    @Query("INSERT INTO new com.springboot.studentservice.dao.ResultsDao(studentId, subjectId, scoreId) " +
+//            "SELECT s.studentId, su.subjectId, sc.scoreId FROM Student s JOIN Subject su JOIN Score sc WHERE s.studentId = ?1 and su.subject = ?2 " +
+//            "and sc.score = ?3)" )
+
+    @Query(value = "INSERT INTO Results (student_id, subject_id, score_id) " +
+            "SELECT s.student_id, su.subject_id, sc.score_id " +
+            "FROM Student s, Subject su, Score sc " +
+            "WHERE s.student_id = ?1 and su.subject = ?2 and sc.score = ?3", nativeQuery = true)
+    public int addStudentSubjectScore(long studentId, String subject, int score);
 
 }

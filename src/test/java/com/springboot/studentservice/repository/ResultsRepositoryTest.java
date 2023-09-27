@@ -10,6 +10,7 @@ import com.springboot.studentservice.entity.Subject;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -22,7 +23,7 @@ public class ResultsRepositoryTest {
     private ResultsRepository resultsRepository;
 
 
- /*     @Test
+/*    @Test
   public void getAllResults() throws Exception{
         Student student = new Student();
             student.setLastName("Carfagna");
@@ -46,27 +47,26 @@ public class ResultsRepositoryTest {
                 .build();
 
         resultsRepository.save(results);
-    }*/
-
-  /*  @Test
-    public void getAllResults(){
-        List<ResultsDao> results = resultsRepository.getAllResults();
-
     }
+*/
+      @Test
+        public void getAllResults(){
+            List<ResultsDao> results = resultsRepository.getAllResults();
+            assertNotNull(results, "Results should not be null");
+            assertEquals(96, results.size(), "There should be 96 results");
+            for(ResultsDao result: results){
+                assertNotNull(result.getResultId(),"Result Id should not be null");
+            }
+        }
 
     // return all subjects with scores for specific student
     @Test
     public void findAllResultsForOneStudent(){
         int studentId = 2;
 
-        List<ResultsProjection> resultsDtoList = resultsRepository.findAllResultsForOneStudent(studentId);
-        for (ResultsProjection results : resultsDtoList) {
-            System.out.println("First Name: " + results.getFirstName());
-            System.out.println("Last Name: " + results.getLastName());
-            System.out.println("Subject: " + results.getSubject());
-            System.out.println("Score: " + results.getScore());
-            System.out.println("-----------------------------------");
-        }
+        List<ResultsDao> resultsDaoList = resultsRepository.findAllResultsForOneStudent(studentId);
+        assertNotNull(resultsDaoList, "Results should not be null");
+        assertEquals(4, resultsDaoList.size(), "There should be 4 results");
 
     }
 
@@ -74,19 +74,38 @@ public class ResultsRepositoryTest {
     @Test
     public void getSubjectScoreForOneStudent(){
         int studentId = 11;
-       String subject = "Maths";
+       int subjectId = 3;
 
-       ResultsProjection result = resultsRepository.getSubjectScoreForOneStudent(studentId, subject);
-        System.out.println("First Name: " + result.getFirstName());
-        System.out.println("Last Name: " + result.getLastName());
-        System.out.println("Subject: " + result.getSubject());
-        System.out.println("Score: " + result.getScore());
-        System.out.println("-----------------------------------");
+       List<ResultsDao> result = resultsRepository.getSubjectScoreForOneStudent(studentId, subjectId);
+        assertNotNull(result, "Results should not be null");
+        assertEquals(1, result.size(), "There should be 1 result");
+    }
+
+    // return one subject score for specific student
+    @Test
+    public void getStudentScoreForOneSubject(){
+        int subjectId = 3;
+
+        List<ResultsDao> result = resultsRepository.getStudentScoreForOneSubject(subjectId);
+        assertNotNull(result, "Results should not be null");
+        assertEquals(24, result.size(), "There should be 24 result");
+    }
+
+    @Test
+    public void addStudentSubjectScore(){
+          String subject = "Maths";
+          long studentId = 4;
+          int score = 5;
+          int count = resultsRepository.addStudentSubjectScore(studentId, subject, score);
+
+//          assertEquals(1, count, "Result inserted");
+          assertEquals(0, count, "Student/Subject not found");
+
     }
 
     //get all results
     @Test
     public void getAllResultsData(){
         List<ResultsProjection> resultsDtoList = resultsRepository.getAllResultsData();
-    }*/
+    }
 }
