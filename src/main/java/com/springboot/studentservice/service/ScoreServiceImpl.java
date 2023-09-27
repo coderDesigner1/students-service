@@ -50,8 +50,9 @@ public class ScoreServiceImpl implements ScoreService{
 
     @Override
     public void updateScore(ScoreDto scoreDto) {
-       scoreRepository.updateScore(scoreDto.getScore(), scoreDto.getScoreId());
-
+        ModelMapper modelMapper = new ModelMapper();
+        Score score = modelMapper.map(scoreDto, Score.class);
+       scoreRepository.save(score);
     }
 
 

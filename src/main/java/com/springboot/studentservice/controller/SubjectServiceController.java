@@ -36,25 +36,25 @@ public class  SubjectServiceController {
         return new ResponseEntity<>(subjectResponseModelList, HttpStatus.OK);
     }
 
-    @DeleteMapping("/{subjectId}")
-    public ResponseEntity<Void> deleteSubject(@PathVariable int subjectId){
+    @DeleteMapping("/deleteSubject/{subjectId}")
+    public ResponseEntity<Void> deleteSubject(@PathVariable Long subjectId){
         subjectService.deleteSubject(subjectId);
         return ResponseEntity.noContent().build(); // HTTP 204 No Content response
     }
 
-    @PutMapping
-    public ResponseEntity<Void> updateSubject(@RequestBody SubjectRequestModel subjectRequestModel){
+    @PutMapping("/updateSubject")
+    public ResponseEntity<String> updateSubject(@RequestBody SubjectRequestModel subjectRequestModel){
         ModelMapper modelMapper = new ModelMapper();
         SubjectDto subjectToUpdate = modelMapper.map(subjectRequestModel, SubjectDto.class);
-        subjectService.updateSubject(subjectToUpdate);
-        return ResponseEntity.noContent().build();
+        SubjectDto subjectDto = subjectService.updateSubject(subjectToUpdate);
+        return new ResponseEntity<>(subjectDto.getSubject()+" Subject is updated", HttpStatus.OK);
     }
 
-    @PostMapping
-    public ResponseEntity<Void> addSubject(@RequestBody SubjectRequestModel subjectRequestModel){
+    @PostMapping("/addSubject")
+    public ResponseEntity<String> addSubject(@RequestBody SubjectRequestModel subjectRequestModel){
         ModelMapper modelMapper = new ModelMapper();
         SubjectDto subjectToAdd = modelMapper.map(subjectRequestModel, SubjectDto.class);
-        subjectService.addSubject(subjectToAdd);
-        return ResponseEntity.noContent().build();
+        SubjectDto subjectDto = subjectService.addSubject(subjectToAdd);
+        return new ResponseEntity<>(subjectDto.getSubject()+" Subject is added", HttpStatus.CREATED);
     }
 }

@@ -36,7 +36,7 @@ public class ScoreServiceController {
         return new ResponseEntity<>(scoreResponseModelList, HttpStatus.OK);
     }
 
-    @PostMapping
+    @PostMapping("/addScore")
     public ResponseEntity<String> addScore(@RequestBody ScoreRequestModel scoreRequestModel){
         ModelMapper modelMapper = new ModelMapper();
         ScoreDto scoreDto = modelMapper.map(scoreRequestModel, ScoreDto.class);
@@ -50,11 +50,11 @@ public class ScoreServiceController {
         return new ResponseEntity<>("Score is deleted", HttpStatus.OK);
     }
 
-    @PutMapping
-    public ResponseEntity<Void> updateScore(@RequestBody ScoreRequestModel scoreRequestModel){
+    @PutMapping("/updateScore")
+    public ResponseEntity<String> updateScore(@RequestBody ScoreRequestModel scoreRequestModel){
         ModelMapper modelMapper = new ModelMapper();
         ScoreDto scoreDto = modelMapper.map(scoreRequestModel, ScoreDto.class);
         scoreService.updateScore(scoreDto);
-        return ResponseEntity.noContent().build();
+        return new ResponseEntity<>("Score is updated", HttpStatus.OK);
     }
 }
