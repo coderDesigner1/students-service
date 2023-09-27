@@ -19,12 +19,6 @@ public interface AddressRepository extends JpaRepository<Address, Long> {
     )
     public int deleteAddressById(int id);
 
-    @Modifying
-    @Transactional
-    @Query(
-            value="Update Address set state = :state where address_id = :id",
-            nativeQuery = true
-    )
-    public int updateAddressById(@Param("state") String add, @Param("id") int id);
+
 
 }

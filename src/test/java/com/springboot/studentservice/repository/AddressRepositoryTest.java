@@ -1,5 +1,7 @@
 package com.springboot.studentservice.repository;
 
+import com.springboot.studentservice.dao.ResultsDao;
+import com.springboot.studentservice.dto.AddressDto;
 import com.springboot.studentservice.entity.Address;
 import com.springboot.studentservice.entity.Student;
 import org.junit.jupiter.api.Test;
@@ -9,6 +11,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @SpringBootTest
 public class AddressRepositoryTest {
@@ -61,6 +66,42 @@ public class AddressRepositoryTest {
         List<Address> addressList = addressRepository.findAll();
         System.out.println("addressList = " + addressList);
     }*/
+
+    @Test
+    public void saveAddress(){
+        Address address = new Address();
+
+        address.setStu_add_street("1254 Main Street");
+        address.setStu_add_city("Springfield");
+        address.setStu_add_state("CA");
+        address.setStu_add_country("USA");
+
+        Address address1 = addressRepository.save(address);
+
+        assertNotNull(address1.getStu_address_id(), "Address should not be null");
+    }
+
+    @Test
+    public void updateAddress(){
+        Address address = new Address();
+
+        address.setStu_address_id(31L);
+        address.setStu_add_street("1254 Main Street");
+        address.setStu_add_city("Springfield");
+        address.setStu_add_state("CA");
+        address.setStu_add_country("USA");
+
+      Address address1= addressRepository.save(address);
+
+      assertNotNull(address1.getStu_address_id(), "Address should not be null");
+    }
+
+    @Test
+    public void deleteAddress(){
+        Long id=50L;
+        addressRepository.deleteById(id);
+
+    }
 
     
 }
