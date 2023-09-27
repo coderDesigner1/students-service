@@ -11,15 +11,15 @@ import java.util.List;
 @NamedNativeQueries({
         @NamedNativeQuery(
                 name="Student.findStudentWithSameFirstName",
-                query = "select student_id, first_name,  last_name ,birth_date, enter_year, email, s.address_id,  street, city, state, country from student s, address a\n" +
-                        "where s.address_id = a.stu_address_id and s.first_name = ?1",
+                query = "select student_id, first_name,  last_name ,birth_date, enter_year, email, s.address_id,  street, city, state, country from student s left join address a \n" +
+                        "on s.address_id = a.stu_address_id where s.first_name = ?1",
                 resultClass = Student.class
                 //resultSetMapping = "StudentsFirstNameMapping"
         ),
         @NamedNativeQuery(
                 name="Student.findStudentWithSameLastName",
-                query = "select student_id, first_name,  last_name ,birth_date, enter_year, email, s.address_id,  street, city, state, country from student s, address a\n" +
-                        "where s.address_id = a.stu_address_id and s.last_name = ?1",
+                query = "select student_id, first_name,  last_name ,birth_date, enter_year, email, s.address_id,  street, city, state, country from student s left join address a \n" +
+                        "on s.address_id = a.stu_address_id where s.last_name = ?1",
                 resultClass = Student.class
                 //resultSetMapping = "StudentsLastNameMapping"
         ),
@@ -32,8 +32,8 @@ import java.util.List;
         ),
         @NamedNativeQuery(
                 name="Student.findStudentWithSameFirstAndLastName",
-                query = "select s.student_id,s.first_name,  s.last_name ,birth_date, enter_year, email,s.address_id, street, city, state, country from student s, address a\n" +
-                        "where s.address_id = a.stu_address_id and s.first_name = ?1 and s.last_name = ?2",
+                query = "select s.student_id,s.first_name,  s.last_name ,birth_date, enter_year, email,s.address_id, street, city, state, country from student s left join address a \n" +
+                        "on s.address_id = a.stu_address_id where s.first_name = ?1 and s.last_name = ?2",
                 resultClass = Student.class
                 //resultSetMapping = "StudentsFirstAndLastNameMapping"
         )

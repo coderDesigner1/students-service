@@ -61,9 +61,7 @@ public interface ResultsRepository extends JpaRepository<Results, Long> {
 //            "and sc.score = ?3)" )
 
     @Query(value = "INSERT INTO Results (student_id, subject_id, score_id) " +
-            "SELECT s.student_id, su.subject_id, sc.score_id " +
-            "FROM Student s, Subject su, Score sc " +
-            "WHERE s.student_id = ?1 and su.subject = ?2 and sc.score = ?3", nativeQuery = true)
-    public int addStudentSubjectScore(long studentId, String subject, int score);
+            "VALUES (?1,?2,?3)", nativeQuery = true)
+    public int addStudentSubjectScore(Long studentId, Long subject_id, Long score_id);
 
 }

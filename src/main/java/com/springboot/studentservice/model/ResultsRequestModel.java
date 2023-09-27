@@ -9,6 +9,8 @@ import lombok.*;
 @ToString
 public class ResultsRequestModel {
     private int studentId;
+    private int scoreId;
+    private int subjectId;
     private int score;
     private String subject;
 }

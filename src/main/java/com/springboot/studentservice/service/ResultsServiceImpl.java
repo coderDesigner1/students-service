@@ -103,7 +103,7 @@ public class ResultsServiceImpl implements ResultsService{
     public int addScoreToStudentForSubject(ResultsDto resultsDto) {
 //        ModelMapper modelMapper = new ModelMapper();
 //        ResultsDao resultsDao = modelMapper.map(resultsDto, ResultsDao.class);
-       int count = resultsRepository.addStudentSubjectScore(resultsDto.getStudentId(), resultsDto.getSubject(), resultsDto.getScore());
+       int count = resultsRepository.addStudentSubjectScore(resultsDto.getStudentId(), resultsDto.getSubjectId(), resultsDto.getScoreId());
 
        // System.out.println("resultsDtoList = " + resultsDao.toString());
         return count;

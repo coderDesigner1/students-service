@@ -40,7 +40,7 @@ public class AddressServiceController {
         ModelMapper modelMapper = new ModelMapper();
         AddressDto addressDto = modelMapper.map(addressRequestModel, AddressDto.class);
         AddressDto addressDto1 = addressService.addAddress(addressDto);
-        return new ResponseEntity<>(addressDto1.getStu_address_id()+" Address Created", HttpStatus.CREATED);
+        return new ResponseEntity<>(" Address Added", HttpStatus.CREATED);
     }
 
     @PutMapping("/updateAddress")
@@ -48,7 +48,7 @@ public class AddressServiceController {
         ModelMapper modelMapper = new ModelMapper();
         AddressDto addressDto = modelMapper.map(addressRequestModel, AddressDto.class);
         AddressDto addressDto1 = addressService.updateAddress(addressDto);
-        return new ResponseEntity<>(addressDto1.getStu_address_id()+"Updated Address", HttpStatus.OK);
+        return new ResponseEntity<>(" Updated Address", HttpStatus.OK);
     }
 
     @DeleteMapping("/deleteAddress/{id}")

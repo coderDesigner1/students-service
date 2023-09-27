@@ -15,6 +15,8 @@ public class ResultsDto {
     private int score;
     private String subject;
     private String street;
+    private long scoreId;
+    private long subjectId;
 
 //    public ResultsDto(Long resultId, String firstName, String lastName, String subject, Integer score) {
 //        this.resultId = resultId;
